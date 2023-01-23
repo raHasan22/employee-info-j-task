@@ -30,7 +30,7 @@ function App() {
           
         </div>
         <div className="card-body card-actions justify-center text-center">
-            <button onClick={()=> setShow(!show)} className="btn btn-error text-white">{show === true ? "Hide Details" : "View Details"}</button>
+            <button onClick={()=> setShow(!show)} className="btn btn-error btn-sm text-white">{show === true ? "Hide Details" : "View Details"}</button>
           </div>
           {
             show && <div className='card lg:card-side lg:col-span-5 m-5 shadow-xl grid sm:grid-cols-1 lg:grid-cols-2'>
