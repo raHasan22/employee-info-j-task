@@ -4,11 +4,20 @@ import './App.css';
 function App() {
   const [users, setUsers] = useState(null);
   const [show, setShow] = useState(false);
+  const [userid, setUserid] = useState(null);
+
   useEffect(() =>{
     fetch('https://jsonplaceholder.typicode.com/users')
         .then(res => res.json())
         .then(data => setUsers(data));
   },[])
+
+  const showItems = (id) =>{
+    setUserid(null);
+    setShow(!show);
+    setUserid(id)
+    
+  }
   return (
       <div className="max-w-[1200px] mx-auto my-5">
       {users?.map(user =>
@@ -30,10 +39,10 @@ function App() {
           
         </div>
         <div className="card-body card-actions justify-center text-center">
-            <button onClick={()=> setShow(!show)} className="btn btn-error btn-sm text-white">{show === true ? "Hide Details" : "View Details"}</button>
+            <button onClick={()=> showItems(user.id)} className="btn btn-error btn-sm text-white">{(show && user.id === userid) ? "Hide Details" : "View Details"}</button>
           </div>
           {
-            show && <div className='card lg:card-side lg:col-span-5 m-5 shadow-xl grid sm:grid-cols-1 lg:grid-cols-2'>
+            (show && user.id === userid) && <div className='card lg:card-side lg:col-span-5 m-5 shadow-xl grid sm:grid-cols-1 lg:grid-cols-2'>
             <div className="card-body lg:col-span-2">
               <h2 className='text-xl font-bold'>Email</h2>
               <p>{user.email}</p>
